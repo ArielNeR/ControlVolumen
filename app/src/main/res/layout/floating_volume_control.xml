@@ -1,30 +1,30 @@
-<!-- res/layout/floating_volume_control.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#E0FFFFFF"
-    android:elevation="8dp">
+    android:padding="12dp"
+    android:background="#00000000"
+    android:elevation="12dp">
 
-    <TextView
-        android:text="Ajustar Volumen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:layout_marginBottom="8dp"/>
+    <FrameLayout
+        android:id="@+id/frameButton"
+        android:layout_width="74dp"
+        android:layout_height="220dp"
+        android:background="@drawable/button_rounded">
 
-    <SeekBar
-        android:id="@+id/seekBarVolume"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content" />
+        <SeekBar
+            android:id="@+id/seekBarVolume"
+            android:layout_width="154dp"
+            android:layout_height="194dp"
+            android:backgroundTint="#FAFFFFFF"
+            android:maxHeight="8dp"
+            android:paddingVertical="60dp"
+            android:progressDrawable="@drawable/seekbar_progress"
+            android:rotation="-90"
+            android:thumb="@drawable/seekbar_thumb"
+            android:translationX="-40dp" />
 
-    <!-- Botón Cerrar -->
-    <Button
-        android:id="@+id/btnClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cerrar"
-        android:layout_marginTop="8dp"/>
+    </FrameLayout>
+
 </LinearLayout>

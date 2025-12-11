@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="theme_options">
+        <item>@string/theme_classic</item>
+        <item>@string/theme_ios</item>
+        <item>@string/theme_spiderman</item>
+    </string-array>
+</resources>

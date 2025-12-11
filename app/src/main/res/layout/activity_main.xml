@@ -1,13 +1,63 @@
-<!-- res/layout/activity_main.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnStartOverlay"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Iniciar Barra de Volumen" />
-</LinearLayout>
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnStartOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start_overlay" />
+
+        <!-- Tema visual -->
+        <TextView
+            android:id="@+id/txtThemeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theme_label"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp" />
+
+        <Spinner
+            android:id="@+id/spinnerTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/theme_options" />
+
+        <!-- Boost -->
+        <TextView
+            android:id="@+id/txtBoostLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/boost_label"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp" />
+
+        <SeekBar
+            android:id="@+id/seekBoost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="250" />
+
+        <TextView
+            android:id="@+id/txtBoostValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:layout_marginTop="8dp" />
+
+        <!-- Dark mode (solo actividad) -->
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchDarkTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dark_mode_label"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
+</ScrollView>
