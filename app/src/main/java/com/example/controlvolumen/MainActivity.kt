@@ -1,7 +1,9 @@
 package com.example.controlvolumen
 
+import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -23,12 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var prefs: SharedPreferences
 
-    // Activity Result API para el permiso de overlay
+    // Para el permiso de overlay
     private val overlayPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (Settings.canDrawOverlays(this)) {
-                    startOverlayService()
+                    checkNotificationPermissionAndStart()
                 } else {
                     Toast.makeText(
                         this,
@@ -36,7 +38,21 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }
+        }
+
+    // Para el permiso de notificaciones (Android 13+)
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                startOverlayService()
             } else {
+                // Intentar iniciar de todos modos, la notificación simplemente no se mostrará
+                Toast.makeText(
+                    this,
+                    "Sin permiso de notificaciones, el servicio podría no funcionar correctamente",
+                    Toast.LENGTH_LONG
+                ).show()
                 startOverlayService()
             }
         }
@@ -72,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
         seekBoost.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(sb: SeekBar?, progress: Int, fromUser: Boolean) {
-                val boost = if (progress < 50) 50 else progress // mínimo 50%
+                val boost = if (progress < 50) 50 else progress
                 txtBoostValue.text = getString(R.string.boost_value, boost)
                 prefs.edit { putInt(keyBoost, boost) }
             }
@@ -103,31 +119,68 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnStartOverlay.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (!Settings.canDrawOverlays(this)) {
-                    val uri = "package:$packageName".toUri()
-                    val intent = Intent(
-                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        uri
-                    )
-                    overlayPermissionLauncher.launch(intent)
-                } else {
+            checkOverlayPermission()
+        }
+    }
+
+    private fun checkOverlayPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                val uri = "package:$packageName".toUri()
+                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri)
+                overlayPermissionLauncher.launch(intent)
+            } else {
+                checkNotificationPermissionAndStart()
+            }
+        } else {
+            startOverlayService()
+        }
+    }
+
+    private fun checkNotificationPermissionAndStart() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Android 13+ requiere permiso de notificaciones
+            when {
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED -> {
                     startOverlayService()
                 }
-            } else {
-                startOverlayService()
+                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
+                    Toast.makeText(
+                        this,
+                        "Se necesita permiso de notificaciones para el servicio",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+                else -> {
+                    notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
             }
+        } else {
+            startOverlayService()
         }
     }
 
     private fun startOverlayService() {
-        val intent = Intent(this, VolumeOverlayService::class.java)
+        try {
+            val intent = Intent(this, VolumeOverlayService::class.java)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ContextCompat.startForegroundService(this, intent)
-        } else {
-            startService(intent)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                ContextCompat.startForegroundService(this, intent)
+            } else {
+                startService(intent)
+            }
+            Toast.makeText(this, "Servicio de volumen iniciado", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(
+                this,
+                "Error al iniciar servicio: ${e.message}",
+                Toast.LENGTH_LONG
+            ).show()
+            e.printStackTrace()
         }
-        Toast.makeText(this, "Servicio de volumen iniciado", Toast.LENGTH_SHORT).show()
     }
 }
