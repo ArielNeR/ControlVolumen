@@ -1,96 +1,90 @@
 # 🎚️ ControlVolumen
 
-Aplicación Android que muestra un **control de volumen flotante** sobre cualquier app del sistema, permitiendo ajustar el volumen multimedia mediante una barra deslizante tipo *overlay*.
+Aplicación Android que superpone un **control deslizante de volumen multimedia** sobre cualquier pantalla, permitiendo ajustar el volumen sin salir de la app que estés usando.
 
 ---
 
 ## 📱 Características
 
-- Barra de volumen flotante (overlay)
-- Control del volumen multimedia del sistema
-- Deslizar para mostrar u ocultar el control
-- Funciona sobre cualquier aplicación
+- Barra flotante (overlay) que aparece sobre cualquier aplicación  
+- Control exclusivo del volumen de multimedia del sistema  
+- Se muestra / oculta con un gesto de deslizamiento  
 - Compatible desde Android 5.0 (API 21)
 
 ---
 
-## 🛠️ Tecnologías
+## 🛠️ Stack técnico
 
-- **Kotlin**
-- **Android SDK**
-- **Gradle (Kotlin DSL)**
-- **Material Design**
-- **Servicios Android (Service)**
-- **SYSTEM_ALERT_WINDOW (overlay)**
+| Tecnología | Uso |
+|------------|-----|
+| Kotlin | Lenguaje principal |
+| Android SDK | Framework nativo |
+| Gradle Kotlin DSL | Automatización de builds |
+| Material Design | UI / UX |
+| Service + `SYSTEM_ALERT_WINDOW` | Overlay flotante |
 
 ---
 
 ## 📂 Estructura del proyecto
-
-```text
 ControlVolumen/
-├── app/
-│   ├── src/main/java/com/example/controlvolumen/
-│   │   ├── MainActivity.kt
-│   │   └── VolumeOverlayService.kt
-│   ├── res/
-│   │   ├── layout/
-│   │   │   ├── activity_main.xml
-│   │   │   └── floating_volume_control.xml
-│   │   └── values/
-│   │       └── strings.xml
-├── gradle/
+├── app/src/main/java/com/example/controlvolumen/
+│   ├── MainActivity.kt
+│   └── VolumeOverlayService.kt
+├── app/src/main/res/
+│   ├── layout/
+│   │   ├── activity_main.xml
+│   │   └── floating_volume_control.xml
+│   └── values/strings.xml
 ├── build.gradle.kts
 └── settings.gradle.kts
-📸 Capturas de pantalla
-<p align="center"> <img src="captures/pantallaprincipal.jpeg" width="220" alt="Pantalla principal"/> <img src="captures/modocantador.jpeg" width="220" alt="Modo cantador"/> <img src="captures/modojugador.jpeg" width="220" alt="Modo jugador"/> </p>
-###⬇️ Descarga directa (APK)
-1. Descarga el APK desde este repositorio:  
-   👉 [Descargar APK](https://github.com/ArielNeR/BingoRoyale/raw/master/apk/app-debug.apk)
-2. Habilita "Instalar desde fuentes desconocidas" en tu dispositivo
-3. Instala el APK
+Copy
 
-⚠️ Android puede mostrar una advertencia de seguridad al instalar APKs fuera de Google Play.
+---
 
-🚀 Instalación y ejecución (desde código)
-Clona el repositorio:
+## 📸 Capturas de pantalla
 
-bash
-Copiar código
+<p align="center">
+  <img src="captures/pantallaprincipal.jpeg" width="220" alt="Pantalla principal"/>
+  <img src="captures/modocantador.jpeg" width="220" alt="Modo cantador"/>
+  <img src="captures/modojugador.jpeg" width="220" alt="Modo jugador"/>
+</p>
+
+---
+
+## ⬇️ APK de prueba
+
+1. Descarga el APK:  
+   👉 [app-debug.apk](https://github.com/ArielNeR/BingoRoyale/raw/master/apk/app-debug.apk)
+2. Activa “Orígenes desconocidos” en Ajustes → Seguridad.
+3. Abre el APK y confía la instalación.
+
+> ⚠️ Android advertirá sobre instalaciones externas a Play Protect; es normal en APKs de desarrollo.
+
+---
+
+## 🚀 Compilar desde código
+
+```bash
+# Clonar
 git clone https://github.com/ArielNeR/ControlVolumen.git
-Abre el proyecto en Android Studio
+cd ControlVolumen
 
-Ejecuta la app en un dispositivo físico o emulador
-
-🔐 Permisos requeridos
-La aplicación solicita el permiso:
-
-SYSTEM_ALERT_WINDOW
-
-Necesario para mostrar la barra flotante sobre otras aplicaciones.
-
-Al iniciar la app, se redirige automáticamente a la pantalla de permisos si no está concedido.
-
-▶️ Uso
-Abre la aplicación
-
-Pulsa “Iniciar Barra de Volumen”
-
-Concede el permiso de superposición
-
-Desliza desde el borde para mostrar el control
-
-Ajusta el volumen con la barra
-
-📌 Notas
-El servicio se ejecuta en segundo plano
-
-El control puede ocultarse y mostrarse mediante gestos
-
-Pensado como base para personalización o ampliación
-
+# Importar en Android Studio (Chipmunk o superior)
+# Build → Run en dispositivo/emulador
+🔐 Permisos
+Table
+Copy
+Permiso	¿Por qué?
+SYSTEM_ALERT_WINDOW	Dibujar la barra flotante sobre otras apps
+La app redirige automáticamente a la pantalla de permisos si no está concedido.
+▶️ Uso rápido
+Abre la app y pulsa “Iniciar Barra de Volumen”.
+Concede el permiso de superposición.
+Desliza desde el borde para mostrar/ocultar el control.
+¡Listo! Ajusta el volumen sin cerrar tu juego o reproductor.
+📌 Notas de desarrollo
+El servicio VolumeOverlayService vive en 1º plano para evitar que el sistema lo mate.
+El control se oculta 3 s después de soltar la barra (configurable).
+Pensado como plantilla: puedes agregar temas, más flujos de audio o widgets extra.
 📄 Licencia
-Este proyecto está bajo la licencia MIT.
-Puedes usarlo, modificarlo y distribuirlo libremente.
-
-✍️ Desarrollado en Kotlin para Android
+MIT © 2024 – puedes usar, modificar y distribuir el proyecto libremente.
