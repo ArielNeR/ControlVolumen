@@ -11,9 +11,8 @@ Aplicación Android que superpone una **barra deslizante de volumen multimedia**
 ## 📱 Capturas de Pantalla
 
 &lt;p align="center"&gt;
-  &lt;img src="captures/pantallaprincipal.jpeg" width="200" alt="Pantalla Principal"/&gt;
-  &lt;img src="captures/modocantador.jpeg" width="200" alt="Modo Cantador"/&gt;
-  &lt;img src="captures/modojugador.jpeg" width="200" alt="Modo Jugador"/&gt;
+  &lt;img src="captures/iconoControlFlotante.jpeg" width="200" alt="Pantalla Principal"/&gt;
+  &lt;img src="captures/interfazApp.jpeg" width="200" alt="Modo Cantador"/&gt;
 &lt;/p&gt;
 
 ---
