@@ -1,6 +1,8 @@
 # 🎚️ ControlVolumen
 
-Aplicación Android que muestra un **control de volumen flotante** sobre cualquier app del sistema, permitiendo ajustar el volumen multimedia mediante una barra deslizante tipo overlay.
+Aplicación Android que muestra un **control de volumen flotante** sobre cualquier app del sistema, permitiendo ajustar el volumen multimedia mediante una barra deslizante tipo *overlay*.
+
+---
 
 ## 📱 Características
 
@@ -9,6 +11,8 @@ Aplicación Android que muestra un **control de volumen flotante** sobre cualqui
 - Deslizar para mostrar u ocultar el control
 - Funciona sobre cualquier aplicación
 - Compatible desde Android 5.0 (API 21)
+
+---
 
 ## 🛠️ Tecnologías
 
@@ -19,31 +23,41 @@ Aplicación Android que muestra un **control de volumen flotante** sobre cualqui
 - **Servicios Android (Service)**
 - **SYSTEM_ALERT_WINDOW (overlay)**
 
+---
+
 ## 📂 Estructura del proyecto
 
+```text
 ControlVolumen/
 ├── app/
-│ ├── src/main/java/com/example/controlvolumen/
-│ │ ├── MainActivity.kt
-│ │ ├── VolumeOverlayService.kt
-│ ├── res/
-│ │ ├── layout/
-│ │ │ ├── activity_main.xml
-│ │ │ └── floating_volume_control.xml
-│ │ └── values/
-│ │ └── strings.xml
+│   ├── src/main/java/com/example/controlvolumen/
+│   │   ├── MainActivity.kt
+│   │   └── VolumeOverlayService.kt
+│   ├── res/
+│   │   ├── layout/
+│   │   │   ├── activity_main.xml
+│   │   │   └── floating_volume_control.xml
+│   │   └── values/
+│   │       └── strings.xml
 ├── gradle/
 ├── build.gradle.kts
 └── settings.gradle.kts
+📸 Capturas de pantalla
+<p align="center"> <img src="captures/pantallaprincipal.jpeg" width="220" alt="Pantalla principal"/> <img src="captures/modocantador.jpeg" width="220" alt="Modo cantador"/> <img src="captures/modojugador.jpeg" width="220" alt="Modo jugador"/> </p>
+###⬇️ Descarga directa (APK)
+1. Descarga el APK desde este repositorio:  
+   👉 [Descargar APK](https://github.com/ArielNeR/BingoRoyale/raw/master/apk/app-debug.apk)
+2. Habilita "Instalar desde fuentes desconocidas" en tu dispositivo
+3. Instala el APK
+
+⚠️ Android puede mostrar una advertencia de seguridad al instalar APKs fuera de Google Play.
+
+🚀 Instalación y ejecución (desde código)
+Clona el repositorio:
 
 bash
 Copiar código
-
-## 🚀 Instalación y ejecución
-
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/ControlVolumen.git
+git clone https://github.com/ArielNeR/ControlVolumen.git
 Abre el proyecto en Android Studio
 
 Ejecuta la app en un dispositivo físico o emulador
@@ -52,6 +66,7 @@ Ejecuta la app en un dispositivo físico o emulador
 La aplicación solicita el permiso:
 
 SYSTEM_ALERT_WINDOW
+
 Necesario para mostrar la barra flotante sobre otras aplicaciones.
 
 Al iniciar la app, se redirige automáticamente a la pantalla de permisos si no está concedido.
@@ -63,7 +78,7 @@ Pulsa “Iniciar Barra de Volumen”
 
 Concede el permiso de superposición
 
-Desliza desde el borde para mostrar el control de volumen
+Desliza desde el borde para mostrar el control
 
 Ajusta el volumen con la barra
 
