@@ -71,6 +71,9 @@ El servicio VolumeOverlayService vive en primer plano para evitar que el sistema
 El control se oculta 3 s después de soltar la barra (configurable).
 Pensado como plantilla: puedes agregar temas, más flujos de audio o widgets extra.
 
+### 📄 Licencia
+MIT © 2024 – puedes usar, modificar y distribuir el proyecto libremente.
+
 ## 🚀 Instalación
 
 ### Opción 1 – APK rápida
@@ -89,6 +92,3 @@ cd ControlVolumen
 
 # Importar en Android Studio
 # Build → Run en dispositivo/emulador
-
-### 📄 Licencia
-MIT © 2024 – puedes usar, modificar y distribuir el proyecto libremente.
